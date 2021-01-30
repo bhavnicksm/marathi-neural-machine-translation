@@ -12,7 +12,8 @@ Seq2Seq with Attention (100 epochs) | 52.8
 
 Links of references which we refered to when making this project: 
 
-Code:
+### Code:
+
 *   [PyTorch's 60 min Blitz](https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)
 *   [Ben Trevett's Seq2Seq tutorials in Pytorch](https://github.com/bentrevett/pytorch-seq2seq)
 *   [PyTorch's Official TorchText tutorial](https://pytorch.org/tutorials/beginner/torchtext_translation_tutorial.html)
@@ -20,5 +21,6 @@ Code:
 *   [PyTorch's nn.Transformer tutorial](https://pytorch.org/tutorials/beginner/transformer_tutorial.html)
 
 
-Math:
+### FAQ:
 *   [LSTM vs GRU](https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm)
+*   [GradientTape](https://stackoverflow.com/questions/53953099/what-is-the-purpose-of-the-tensorflow-gradient-tape)
