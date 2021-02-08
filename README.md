@@ -24,7 +24,10 @@ Links of references which we refered to when making this project:
 ### TensorFlow:
 *   [Tensorflow Officical NMT with Attention Tutorial](https://www.tensorflow.org/tutorials/text/nmt_with_attention)
 *   [Tensorflow Official NMT with Transformer Tutorial](https://www.tensorflow.org/tutorials/text/transformer)
+*   [Tensorflow saving checkpoints tutorial](https://www.tensorflow.org/guide/checkpoint)
 
+### Azure:
+*   [Blob storage tutorial](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-python)
 
 ## Papers:
-*  [Seq2Seq with Attention (Bahdanau et al.)](https://arxiv.org/pdf/1409.0473.pdf)
+*   [Seq2Seq with Attention (Bahdanau et al.)](https://arxiv.org/pdf/1409.0473.pdf)
