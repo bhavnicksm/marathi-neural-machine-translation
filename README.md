@@ -25,6 +25,7 @@ Links of references which we refered to when making this project:
 *   [Tensorflow Officical NMT with Attention Tutorial](https://www.tensorflow.org/tutorials/text/nmt_with_attention)
 *   [Tensorflow Official NMT with Transformer Tutorial](https://www.tensorflow.org/tutorials/text/transformer)
 *   [Tensorflow saving checkpoints tutorial](https://www.tensorflow.org/guide/checkpoint)
+*   [Effectively use TF 2.0](https://blog.tensorflow.org/2019/02/effective-tensorflow-20-best-practices.html)
 
 ### Azure:
 *   [Blob storage tutorial](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-python)
