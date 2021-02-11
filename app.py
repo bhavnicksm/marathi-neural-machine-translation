@@ -267,11 +267,13 @@ def evaluate(sentence):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'GET':
-		    return render_template('index.html', x='dev')
+		    return render_template('index.html')
     if request.method == 'POST':
      sen = request.form.get("mar_input") 
      res,sen_translation,unk=evaluate(sen)
-     return render_template('result.html', prediction=sen_translation,result=res)
+     res.remove("<eos>")
+     res_sen= ' '.join(res)
+     return render_template('result.html', prediction=sen_translation,result=res_sen)
    
 
 
