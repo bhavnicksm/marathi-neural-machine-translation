@@ -62,7 +62,7 @@ eng_list = add_init_token(eng_list)
 
 
 def tokenize(sent_list):
-  tokenizer = text.Tokenizer(filters='')
+  tokenizer = text.Tokenizer(filters='', oov_token='<unk>')
   tokenizer.fit_on_texts(sent_list)
   tensor_list = tokenizer.texts_to_sequences(sent_list)
   tensor_list = sequence.pad_sequences(tensor_list, padding='post')
@@ -229,7 +229,13 @@ manager.restore_or_initialize()
 def evaluate(sentence):
   attention_plot = np.zeros((eng_tensors.shape[1],mar_tensors.shape[1]))
   sentence = sep_punk(sentence)
-  inputs = [mar_tokenizer.word_index[i] for i in sentence.lower().split(' ') if i!='']
+  inputs = []
+  for i in sentence.lower().split(' '):
+    if i != '' :
+      if (i in mar_tokenizer.word_docs.keys()):
+        inputs.append(mar_tokenizer.word_index[i])
+      else: inputs.append(mar_tokenizer.word_index['<unk>'])
+ 
   inputs = tf.keras.preprocessing.sequence.pad_sequences([inputs],
                                                              maxlen=mar_tensors.shape[1],
                                                              padding='post')
@@ -272,4 +278,4 @@ def home():
 
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run()

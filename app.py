@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 from argparse import Namespace
 hype = Namespace(
-          LR = 0.00001,
+          LR = 0.0001,
           BATCH_SIZE = 64,
           NUM_EPOCHS = 100,
           CLIP = 1,
@@ -17,7 +17,7 @@ hype = Namespace(
 model_hype = Namespace(
             EMBEDDING_SIZE = 128,
             GRU_UNITS = 512,
-            ATTN_SIZE = 2,
+            
        )
 
 
@@ -61,7 +61,7 @@ eng_list = add_init_token(eng_list)
 
 
 def tokenize(sent_list):
-  tokenizer = text.Tokenizer(filters='')
+  tokenizer = text.Tokenizer(filters='', oov_token='<unk>')
   tokenizer.fit_on_texts(sent_list)
   tensor_list = tokenizer.texts_to_sequences(sent_list)
   tensor_list = sequence.pad_sequences(tensor_list, padding='post')
@@ -145,7 +145,7 @@ class Attention(layers.Layer):
 
 
 
-ATTN_SIZE = model_hype.ATTN_SIZE
+ATTN_SIZE = 10
 attention = Attention(ATTN_SIZE)
 #example code
 attn_res ,  attn_w = attention(sample_hidden, sample_out)
@@ -213,7 +213,8 @@ def loss_function(real, pred):
 import os, uuid
 from azure.storage import blob
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__
-#os.mkdir("tf_checkpoint")
+if "tf_checkpoint" not in os.listdir():
+  os.mkdir("tf_checkpoint")
 connect_str = "DefaultEndpointsProtocol=https;AccountName=tfmodel;AccountKey=PinzJZWJy/mFOWDgkBcCTPA9Fnfr7/qvaZSbjxQVH4YGrBt4MseqbKYjUGNKYX9PpBh+zgAk6uDrVpmvejBCiw==;EndpointSuffix=core.windows.net"
 blob_service_client =  BlobServiceClient.from_connection_string(connect_str)
 container_client = blob_service_client.get_container_client("tf-ckpt")
@@ -235,7 +236,13 @@ from matplotlib import ticker
 def evaluate(sentence):
   attention_plot = np.zeros((eng_tensors.shape[1],mar_tensors.shape[1]))
   sentence = sep_punk(sentence)
-  inputs = [mar_tokenizer.word_index[i] for i in sentence.lower().split(' ') if i!='']
+  inputs = []
+  for i in sentence.lower().split(' '):
+    if i != '' :
+      if (i in mar_tokenizer.word_docs.keys()):
+        inputs.append(mar_tokenizer.word_index[i])
+      else: inputs.append(mar_tokenizer.word_index['<unk>'])
+
   inputs = tf.keras.preprocessing.sequence.pad_sequences([inputs],
                                                              maxlen=mar_tensors.shape[1],
                                                              padding='post')
@@ -278,4 +285,4 @@ def home():
 
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run()
